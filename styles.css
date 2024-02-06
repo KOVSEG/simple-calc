@@ -7,8 +7,8 @@
 }
 
 .calculator {
-  width: 540px;
-  height: 542px;
+  width: 440px;
+  height: 600px;
   border: 1px solid black;
   margin: 0 auto;
   box-shadow: 0px 0px 7px 2px black;
@@ -21,26 +21,25 @@
   margin-bottom: 40px;
 }
 
-.buttons {
-  margin: 5px;
-  display: flex;
-}
-
 .btn {
   width: 100px;
   height: 55px;
   margin: 2px;
 }
 
-.operators {
+.buttons {
   display: flex;
-  align-items: flex-end;
+  flex-direction: row;
+  margin: 3px;
 }
 
-/* Increase height of btn's = and +  */
-.plus {
-  height: 173px;
+.btnblock {
+  display: flex;
+  flex-direction: column;
+  justify-content:space-between;
+  width: 330px;
 }
-.equal {
-  height: 173px;
+
+.operators {
+  width: 105px;
 }
