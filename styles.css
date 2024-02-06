@@ -15,9 +15,23 @@
 }
 
 .display {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: auto;
   height: 200px;
   background-color: rgb(231, 231, 231);
+}
+
+.historybtn {
+  align-self: flex-end;
+  margin: 10px 15px 0 0;
+}
+
+.numsondisplay {
+  align-self: flex-end;
+  margin: 0 20px 35px 0;
+  font-size: 45px;
 }
 
 .daynight__mode {
