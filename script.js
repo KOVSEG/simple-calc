@@ -6,9 +6,13 @@ let displayNumber = '';
 
 for(let num of btnNumbers) {
   if(num.value === ',') {
-    num.addEventListener('click', function() {
+    num.addEventListener('click', func);
+
+    function func() {
       showNumsOnDisplay(this.value);
-    });
+      num.removeEventListener('click', func);
+    };
+    
   } else {
     num.addEventListener('click', function() {
       showNumsOnDisplay(this.value);
