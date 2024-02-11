@@ -2,28 +2,29 @@ let numsOnDisplay = document.querySelector('.numsondisplay');
 
 let btnNumbers = document.querySelectorAll('.numbers .btn');
 
-let displayNumber = '';
+let getNums = '';
+let displayNumber = [];
+let history = [];
 
 for(let num of btnNumbers) {
   if(num.value === ',') {
     num.addEventListener('click', func);
-
     function func() {
-      showNumsOnDisplay(this.value);
+      getNums += this.value;
       num.removeEventListener('click', func);
+      showNumsOnDisplay();
     };
-    
   } else {
     num.addEventListener('click', function() {
-      showNumsOnDisplay(this.value);
+      getNums += this.value;
+      showNumsOnDisplay();
     });
   }
 };
 
-function showNumsOnDisplay(elems) {
-  displayNumber += elems;
-  numsOnDisplay.textContent = displayNumber;
+function showNumsOnDisplay() {
+  if(getNums.length <= 16) {
+    numsOnDisplay.textContent = getNums;
+    displayNumber.push(getNums);
+  };
 };
-
-
-console.log(displayNumber);
