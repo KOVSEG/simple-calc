@@ -13,25 +13,26 @@ function startCalc() {
 // Get value of every button
 for(let button of btnCommon) {
   button.addEventListener('click', function func() {
-    if(this.value === ',') {
+    if (this.value === ',') {
       writeZeroBeforeDot();
       this.removeEventListener('click', func); //Restrict commas of number
     };
-    if(this.classList.contains('number')) {
+    if (this.classList.contains('number')) {
       getNums += this.value;
-      numsOnDisplay.textContent = getNums; //Show nums on display
+      limitNumber(getNums);
     };
-
   });
 };
 
-// Write zero first if the first call is a decimal point
+// Write zero first if the first call is a decimal point(comma)
 function writeZeroBeforeDot() {
   if(getNums == '') {
     getNums = '0';
   };
 };
 
-
-// Limit the number of digits on display
-// Forbid to repeat a value 00 before dot, after dot it can repeat many times
+function limitNumber(getNums) {
+  if(getNums.length <= 16) {
+    numsOnDisplay.textContent = getNums; //Show nums on display, lower than 16 digits
+  };
+};
