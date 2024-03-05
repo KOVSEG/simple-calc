@@ -3,6 +3,8 @@ let calculator = document.querySelector('.calculator');
 let btnCommon = document.querySelectorAll('.btn');
 let getBntValueArr = [];
 let getNumsArr = [];
+let fullArr = '';
+let guk = [];
 
 // Turn on the calculator
 calculator.addEventListener('mouseover', startCalc);
@@ -19,7 +21,6 @@ for(let button of btnCommon) {
 // Get sign of every button and pass it to the next function
 function func() {
   let getBtnValue = '';
-  let getThis = this;
 
   if(this.classList.contains('number')) {
     getBtnValue = this.value;
@@ -37,20 +38,34 @@ function func() {
     console.log(this);
   };
 
-  sumFunc(getBtnValue, getThis);
+  sumFunc(getBtnValue);
 };
 
 // Work with value of buttons
-function sumFunc(getValue, thisValue) {
+function sumFunc(getValue) {
 
   getBntValueArr.push(getValue);
-  let getThis = thisValue;
+  let sum = 0;
+
+  for(let i = 0; i < getBntValueArr.length; i++) {
+    if(getBntValueArr[i] == '0'|| getBntValueArr[i] == '00') {
+      sum ++;
+    };
+  };
+
+  if(getBntValueArr[0] == '0' && getValue >= '1') {
+    guk = getBntValueArr.slice(sum);
+    getBntValueArr = [];
+  } else {
+    guk.push(getValue);
+  };
+
+  console.log(getBntValueArr)
+  console.log(guk);
 
   getZeroNumAndComma(getValue);
 
-  getOherNums(getValue);
-
-  console.log(getNumsArr);
+  // getOherNums(getValue);
 
 };
 
@@ -71,13 +86,7 @@ function getZeroNumAndComma(getZeroAndCommaValue) {
     getNumsArr.push(getZeroAndCommaValue);
     checkArrNums();
   };
-};
 
-// Get number from 1 to 9
-function getOherNums(getOtherNums) {
-  if(getNumsArr[0] != '0' && getNumsArr[1] != ',' && getOtherNums != ',') {
-    getNumsArr.push(getOtherNums);
-  };
 };
 
 // Check zero before comma
@@ -85,5 +94,12 @@ function checkArrNums() {
   if(getNumsArr[0] == ',') {
     getNumsArr[0] = '0';
     getNumsArr[1] = ',';
+  };
+};
+
+// Get number from 1 to 9
+function getOherNums(getOtherNums) {
+  if(getNumsArr[0] != '0' && getNumsArr[1] != ',' && getOtherNums != ',') {
+    getNumsArr.push(getOtherNums);
   };
 };
