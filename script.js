@@ -2,9 +2,7 @@ let numsOnDisplay = document.querySelector('.numsondisplay');
 let calculator = document.querySelector('.calculator');
 let btnCommon = document.querySelectorAll('.btn');
 let getBntValueArr = [];
-let getNumsArr = [];
-let fullArr = '';
-let guk = [];
+let getNums = [];
 
 // Turn on the calculator
 calculator.addEventListener('mouseover', startCalc);
@@ -47,59 +45,37 @@ function sumFunc(getValue) {
   getBntValueArr.push(getValue);
   let sum = 0;
 
+  // Get sum of zero nums from every click
   for(let i = 0; i < getBntValueArr.length; i++) {
     if(getBntValueArr[i] == '0'|| getBntValueArr[i] == '00') {
       sum ++;
     };
   };
 
-  if(getBntValueArr[0] == '0' && getValue >= '1') {
-    guk = getBntValueArr.slice(sum);
-    getBntValueArr = [];
-  } else {
-    guk.push(getValue);
-  };
+  if((getBntValueArr[0] == '0' || getBntValueArr[0] == '00') && getValue >= '1' || getValue == ',') {
 
-  console.log(getBntValueArr)
-  console.log(guk);
+    // If first figure > 0 don't clear array and continue getting figures
+    if(getNums[0] >= '1') {
+      getBntValueArr = [];
+      getNums.push(getValue);
+      getBntValueArr.push(getValue);
+    } else {
+      // If first figure is 0, clear every 0 and get comma
+      getNums = getBntValueArr.slice(sum);
+      getBntValueArr = [];
+      getBntValueArr.push(getValue);
 
-  getZeroNumAndComma(getValue);
-
-  // getOherNums(getValue);
-
-};
-
-// Get zero number and decimal value with zero num
-function getZeroNumAndComma(getZeroAndCommaValue) {
-
-  for(let i = 0; i < getBntValueArr.length; i++) {
-    if(getBntValueArr[0] == '0' || getBntValueArr[0] == '00') {
-      getNumsArr[0] = '0';
+      // If comma is first sign - add first zero before comma 
+      firstZeroNum(); 
     };
+
+  } else {
+    getNums.push(getValue);
   };
 
-  if(getNumsArr[0] == '0' && getNumsArr[1] == ',') {
-    getNumsArr.push(getZeroAndCommaValue);
-  };
-
-  if(getZeroAndCommaValue == ',') {
-    getNumsArr.push(getZeroAndCommaValue);
-    checkArrNums();
-  };
-
-};
-
-// Check zero before comma
-function checkArrNums() {
-  if(getNumsArr[0] == ',') {
-    getNumsArr[0] = '0';
-    getNumsArr[1] = ',';
-  };
-};
-
-// Get number from 1 to 9
-function getOherNums(getOtherNums) {
-  if(getNumsArr[0] != '0' && getNumsArr[1] != ',' && getOtherNums != ',') {
-    getNumsArr.push(getOtherNums);
+  function firstZeroNum() {
+    if(getNums[0] == ',') {
+      getNums.unshift('0');
+    };
   };
 };
